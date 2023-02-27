@@ -3,20 +3,14 @@
 
 
 def poly_integral(poly, C=0):
-    if type(poly) != list or len(poly) == 0:
+    if not isinstance(C, int) or not isinstance(poly, list) or len(poly) == 0:
         return None
-
     integral = [C]
-
-    for i in range(len(poly)):
-        coef = poly[i] / (i + 1)
-
-        if coef.is_integer():
-            coef = int(coef)
-
-        integral.append(coef)
-
-    while integral[-1] == 0 and len(integral) > 1:
-        integral.pop()
-
+    for i, coef in enumerate(poly):
+        if not isinstance(coef, int):
+            return None
+        power = i + 1
+        if coef % power != 0:
+            return None
+        integral.append(coef // power)
     return integral
