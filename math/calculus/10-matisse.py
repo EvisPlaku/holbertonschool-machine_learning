@@ -14,18 +14,15 @@ def poly_derivative(poly):
         [0], if the derivate is 0
         None, if poly is not valid
     """
-    if type(poly) is not list or len(poly) < 1:
-        return None
-    for coefficient in poly:
-        if type(coefficient) is not int and type(coefficient) is not float:
-            return None
-    for power, coefficient in enumerate(poly):
-        if power is 0:
-            derivative = [0]
-            continue
-        if power is 1:
-            derivative = []
-        derivative.append(power * coefficient)
-    while derivative[-1] is 0 and len(derivative) > 1:
-        derivative = derivative[:-1]
+    # check if the polynomial is constant or zero
+    if len(poly) == 1 or poly == [0]:
+        return [0]
+
+    # compute the derivative of the polynomial
+    derivative = []
+    for i in range(1, len(poly)):
+        coefficient = i * poly[i]
+        derivative.append(coefficient)
+    if len(derivative) == 0:
+        derivative.append(0)
     return derivative
