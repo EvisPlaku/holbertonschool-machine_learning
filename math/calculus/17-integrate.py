@@ -6,11 +6,12 @@ def poly_integral(poly, C=0):
     if not isinstance(C, int) or not isinstance(poly, list) or len(poly) == 0:
         return None
     integral = [C]
-    for i, coef in enumerate(poly):
-        if not isinstance(coef, int):
-            return None
-        power = i + 1
-        if coef % power != 0:
-            return None
-        integral.append(coef // power)
+    for power, coefficient in enumerate(poly):
+        if (coefficient % (power + 1)) == 0:
+            new_coefficient = coefficient // (power + 1)
+        else:
+            new_coefficient = coefficient / (power + 1)
+        integral.append(new_coefficient)
+    while integral[-1] == 0 and len(integral) > 1:
+        integral = integral[:-1]
     return integral
