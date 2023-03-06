@@ -13,36 +13,19 @@ class Poisson:
         def pmf(self, k): calculates PMF for given number of successes
         def cdf(self, k): calculates CDF for given number of successes
     """
-
     def __init__(self, data=None, lambtha=1.):
-        """
-        class constructor
-        parameters:
-            data [list]: data to be used to estimate the distibution
-            lambtha [float]: the expected number of occurances on a given time
-        Sets the instance attribute lambtha as a float
-        If data is not given:
-            Use the given lambtha or
-            raise ValueError if lambtha is not positive value
-        If data is given:
-            Calculate the lambtha of data
-            Raise TypeError if data is not a list
-            Raise ValueError if data does not contain at least two data points
-        """
-        if data is None:
-            if lambtha < 1:
-                raise ValueError("lambtha must be a positive value")
-            else:
-                self.lambtha = float(lambtha)
-        else:
+        self.lambtha = float(lambtha)
+        if self.lambtha <= 0:
+            raise ValueError('lambtha must be a positive value')
+        if data is not None:
             if type(data) is not list:
-                raise TypeError("data must be a list")
-            elif len(data) < 2:
-                raise ValueError("data must contain multiple values")
-            else:
-                lambtha = float(sum(data) / len(data))
-                self.lambtha = lambtha
+                raise TypeError('data must be a list')
+            if len(data) < 2:
+                raise ValueError('data must contain multiple values')
+            self.lambtha = float(sum(data)) / len(data)
 
+
+    
     def pmf(self, k):
         """
         calculates the value of the PMF for a given number of successes
