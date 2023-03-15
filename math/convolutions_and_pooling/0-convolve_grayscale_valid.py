@@ -20,5 +20,5 @@ def convolve_grayscale_valid(images, kernel):
     for h in range(out_height):
         for w in range(out_width):
             output = np.sum(images[:, height: height + kernel_height, width: width + kernel_width] * kernel, axis=1).sum(axis=1)
-            convoluted[:, height, width] = output
+            convoluted[:, h, w] = output
     return convoluted
