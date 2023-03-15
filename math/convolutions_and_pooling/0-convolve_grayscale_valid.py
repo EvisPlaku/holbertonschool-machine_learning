@@ -1,6 +1,15 @@
+#!/usr/bin/env python3
+"""
+Defines a function that performs valid convolution
+on a grayscale image
+"""
+
 import numpy as np
 
 def convolve_grayscale_valid(images, kernel):
+    """
+    Performs a valid convolution on grayscale images
+    """
     m, h, w = images.shape
     kh, kw = kernel.shape
     # Compute output size
