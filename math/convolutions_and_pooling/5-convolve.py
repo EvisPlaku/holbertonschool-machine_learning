@@ -4,6 +4,9 @@ Defines a function that performs same convolution
 on a grayscale image
 """
 
+import numpy as np
+
+
 def convolve(images, kernel, padding='same', stride=(1, 1)):
     """
     Performs a convolution on images with multiple channels
