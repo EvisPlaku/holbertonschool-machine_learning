@@ -10,8 +10,7 @@ import numpy as np
 
 def likelihood(x, n, P):
     """Check input types and values"""
-    
-    if not isinstance(n, int) or n <= 0:
+        if not isinstance(n, int) or n <= 0:
         raise ValueError("n must be a positive integer")
     if not isinstance(x, int) or x < 0:
         raise ValueError("x must be an integer that is greater than or equal to 0")
@@ -25,6 +24,8 @@ def likelihood(x, n, P):
     # Calculate the likelihood for each probability in P
     likelihoods = np.zeros_like(P)
     for i, p in enumerate(P):
-        likelihoods[i] = np.math.comb(n, x) * (p ** x) * ((1 - p) ** (n - x))
+        numerator = np.prod(np.arange(n-x+1, n+1))
+        denominator = np.prod(np.arange(1, x+1))
+        likelihoods[i] = numerator / denominator * (p ** x) * ((1 - p) ** (n - x))
 
     return likelihoods
